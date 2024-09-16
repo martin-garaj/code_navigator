@@ -54,8 +54,10 @@ sections:
 # llama.cpp
 
 - get hash by running ```git rev-parse --verify HEAD``` or short ```git rev-parse --short HEAD```
-hash: acb2c32c336ce60d765bb189563cc216e57e9fc2
-hash (short): acb2c32c
+
+**hash**: acb2c32c336ce60d765bb189563cc216e57e9fc2
+
+**hash** (short): acb2c32c
 
 # repo version based on SHA
 
