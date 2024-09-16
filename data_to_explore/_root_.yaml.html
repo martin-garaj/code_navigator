@@ -1,0 +1,392 @@
+<div class="page">
+<script type="application/json" id="page-data">
+{"pageTitle": "intro"}
+</script>
+<div class="page-header">
+<span class="header-title">intro</span>
+</div>
+<div class="page-content">
+<div class="section">
+<div class="section-header">
+<span class="header-title">Introduction</span>
+</div>
+<div class="section-content">
+<div class="highlight"><pre><span></span>This is a ```llama-navigator``` a simple HTML/CSS/JS utility that 
+helps to comment and navigate llama.cpp project by creating a dynamic 
+structure of inter-linked documents.
+</pre></div>
+
+</div>
+</div>
+<div class="section">
+<div class="section-header">
+<span class="header-title-prefix">/llama.cpp/examples/simple/</span>
+<span class="header-title">simple.cpp</span>
+<a href="https://github.com/ggerganov/llama.cpp/blob/8ebe8ddebd68526757c631cd019de009697c63c2/examples/simple/simple.cpp#L1" target="_blank" class="header-permalink">link</a>
+</div>
+<div class="section-content">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">  1</span>
+<span class="normal">  2</span>
+<span class="normal">  3</span>
+<span class="normal">  4</span>
+<span class="normal">  5</span>
+<span class="normal">  6</span>
+<span class="normal">  7</span>
+<span class="normal">  8</span>
+<span class="normal">  9</span>
+<span class="normal"> 10</span>
+<span class="normal"> 11</span>
+<span class="normal"> 12</span>
+<span class="normal"> 13</span>
+<span class="normal"> 14</span>
+<span class="normal"> 15</span>
+<span class="normal"> 16</span>
+<span class="normal"> 17</span>
+<span class="normal"> 18</span>
+<span class="normal"> 19</span>
+<span class="normal"> 20</span>
+<span class="normal"> 21</span>
+<span class="normal"> 22</span>
+<span class="normal"> 23</span>
+<span class="normal"> 24</span>
+<span class="normal"> 25</span>
+<span class="normal"> 26</span>
+<span class="normal"> 27</span>
+<span class="normal"> 28</span>
+<span class="normal"> 29</span>
+<span class="normal"> 30</span>
+<span class="normal"> 31</span>
+<span class="normal"> 32</span>
+<span class="normal"> 33</span>
+<span class="normal"> 34</span>
+<span class="normal"> 35</span>
+<span class="normal"> 36</span>
+<span class="normal"> 37</span>
+<span class="normal"> 38</span>
+<span class="normal"> 39</span>
+<span class="normal"> 40</span>
+<span class="normal"> 41</span>
+<span class="normal"> 42</span>
+<span class="normal"> 43</span>
+<span class="normal"> 44</span>
+<span class="normal"> 45</span>
+<span class="normal"> 46</span>
+<span class="normal"> 47</span>
+<span class="normal"> 48</span>
+<span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span></pre></div></td><td class="code"><div><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;common.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;llama.h&quot;</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cmath&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdio&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">print_usage</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="w"> </span><span class="n">argv</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n"><a onclick="handleClick('gpt_params', 'gpt_params.yaml.html')" onmouseover="debouncedHandleHover('gpt_params.yaml.html')" class="permalink">gpt_params</a></span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">params</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">gpt_params_print_usage</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">,</span><span class="w"> </span><span class="n">params</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">LOG_TEE</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">example usage:</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">LOG_TEE</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">    %s -m model.gguf -p </span><span class="se">\&quot;</span><span class="s">Hello my name is</span><span class="se">\&quot;</span><span class="s"> -n 32</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+<span class="w">    </span><span class="n">LOG_TEE</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="w"> </span><span class="n">argv</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n"><a onclick="handleClick('gpt_params', 'gpt_params.yaml.html')" onmouseover="debouncedHandleHover('gpt_params.yaml.html')" class="permalink">gpt_params</a></span><span class="w"> </span><span class="n">params</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">params</span><span class="p">.</span><span class="n">prompt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Hello my name is&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">params</span><span class="p">.</span><span class="n">n_predict</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">gpt_params_parse</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">,</span><span class="w"> </span><span class="n">params</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">print_usage</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">,</span><span class="w"> </span><span class="n">params</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// total length of the sequence including the prompt</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n_predict</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">params</span><span class="p">.</span><span class="n">n_predict</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// init LLM</span>
+
+<span class="w">    </span><span class="n"><a onclick="handleClick('llama_backend_init', 'llama_backend_init.yaml.html')" onmouseover="debouncedHandleHover('llama_backend_init.yaml.html')" class="permalink">llama_backend_init</a></span><span class="p">();</span>
+<span class="w">    </span><span class="n">llama_numa_init</span><span class="p">(</span><span class="n">params</span><span class="p">.</span><span class="n">numa</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// initialize the model</span>
+
+<span class="w">    </span><span class="n">llama_model_params</span><span class="w"> </span><span class="n">model_params</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">llama_model_params_from_gpt_params</span><span class="p">(</span><span class="n">params</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">llama_model</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">model</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">llama_load_model_from_file</span><span class="p">(</span><span class="n">params</span><span class="p">.</span><span class="n">model</span><span class="p">.</span><span class="n">c_str</span><span class="p">(),</span><span class="w"> </span><span class="n">model_params</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">model</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s">&quot;%s: error: unable to load model</span><span class="se">\n</span><span class="s">&quot;</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">__func__</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// initialize the context</span>
+
+<span class="w">    </span><span class="n">llama_context_params</span><span class="w"> </span><span class="n">ctx_params</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">llama_context_params_from_gpt_params</span><span class="p">(</span><span class="n">params</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">llama_context</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">ctx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">llama_new_context_with_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="n">ctx_params</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ctx</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s">&quot;%s: error: failed to create the llama_context</span><span class="se">\n</span><span class="s">&quot;</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">__func__</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// tokenize the prompt</span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">llama_token</span><span class="o">&gt;</span><span class="w"> </span><span class="n">tokens_list</span><span class="p">;</span>
+<span class="w">    </span><span class="n">tokens_list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">::</span><span class="n">llama_tokenize</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="n">params</span><span class="p">.</span><span class="n">prompt</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n_ctx</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="n">llama_n_ctx</span><span class="p">(</span><span class="n">ctx</span><span class="p">);</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n_kv_req</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tokens_list</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">n_predict</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">tokens_list</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+
+<span class="w">    </span><span class="n">LOG_TEE</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">%s: n_predict = %d, n_ctx = %d, n_kv_req = %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">__func__</span><span class="p">,</span><span class="w"> </span><span class="n">n_predict</span><span class="p">,</span><span class="w"> </span><span class="n">n_ctx</span><span class="p">,</span><span class="w"> </span><span class="n">n_kv_req</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// make sure the KV cache is big enough to hold all the prompt and generated tokens</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">n_kv_req</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">n_ctx</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">LOG_TEE</span><span class="p">(</span><span class="s">&quot;%s: error: n_kv_req &gt; n_ctx, the required KV cache size is not big enough</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">__func__</span><span class="p">);</span>
+<span class="w">        </span><span class="n">LOG_TEE</span><span class="p">(</span><span class="s">&quot;%s:        either reduce n_predict or increase n_ctx</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">__func__</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// print the prompt token-by-token</span>
+
+<span class="w">    </span><span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">tokens_list</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;%s&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">llama_token_to_piece</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="n">id</span><span class="p">).</span><span class="n">c_str</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">fflush</span><span class="p">(</span><span class="n">stderr</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// create a llama_batch with size 512</span>
+<span class="w">    </span><span class="c1">// we use this object to submit token data for decoding</span>
+
+<span class="w">    </span><span class="n">llama_batch</span><span class="w"> </span><span class="n">batch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">llama_batch_init</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// evaluate the initial prompt</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">tokens_list</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">llama_batch_add</span><span class="p">(</span><span class="n">batch</span><span class="p">,</span><span class="w"> </span><span class="n">tokens_list</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="nb">false</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// llama_decode will output logits only for the last token of the prompt</span>
+<span class="w">    </span><span class="n">batch</span><span class="p">.</span><span class="n">logits</span><span class="p">[</span><span class="n">batch</span><span class="p">.</span><span class="n">n_tokens</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">llama_decode</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="n">batch</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">LOG_TEE</span><span class="p">(</span><span class="s">&quot;%s: llama_decode() failed</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">__func__</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// main loop</span>
+
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">n_cur</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="n">batch</span><span class="p">.</span><span class="n">n_tokens</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">n_decode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">t_main_start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ggml_time_us</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// TAKING BREAK HERE //</span>
+<span class="w">    </span><span class="c1">// TAKING BREAK HERE //</span>
+<span class="w">    </span><span class="c1">// TAKING BREAK HERE //</span>
+<span class="w">    </span><span class="c1">// TAKING BREAK HERE //</span>
+
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">n_cur</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">n_predict</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// sample the next token</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k">auto</span><span class="w">   </span><span class="n">n_vocab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">llama_n_vocab</span><span class="p">(</span><span class="n">model</span><span class="p">);</span>
+<span class="w">            </span><span class="k">auto</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">logits</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">llama_get_logits_ith</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="n">batch</span><span class="p">.</span><span class="n">n_tokens</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+
+<span class="w">            </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">llama_token_data</span><span class="o">&gt;</span><span class="w"> </span><span class="n">candidates</span><span class="p">;</span>
+<span class="w">            </span><span class="n">candidates</span><span class="p">.</span><span class="n">reserve</span><span class="p">(</span><span class="n">n_vocab</span><span class="p">);</span>
+
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">llama_token</span><span class="w"> </span><span class="n">token_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">token_id</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n_vocab</span><span class="p">;</span><span class="w"> </span><span class="n">token_id</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">candidates</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">llama_token_data</span><span class="p">{</span><span class="w"> </span><span class="n">token_id</span><span class="p">,</span><span class="w"> </span><span class="n">logits</span><span class="p">[</span><span class="n">token_id</span><span class="p">],</span><span class="w"> </span><span class="mf">0.0f</span><span class="w"> </span><span class="p">});</span>
+<span class="w">            </span><span class="p">}</span>
+
+<span class="w">            </span><span class="n">llama_token_data_array</span><span class="w"> </span><span class="n">candidates_p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">candidates</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span><span class="w"> </span><span class="n">candidates</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span><span class="w"> </span><span class="nb">false</span><span class="w"> </span><span class="p">};</span>
+
+<span class="w">            </span><span class="c1">// sample the most likely token</span>
+<span class="w">            </span><span class="k">const</span><span class="w"> </span><span class="n">llama_token</span><span class="w"> </span><span class="n">new_token_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">llama_sample_token_greedy</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">candidates_p</span><span class="p">);</span>
+
+<span class="w">            </span><span class="c1">// is it an end of generation?</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">llama_token_is_eog</span><span class="p">(</span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="n">new_token_id</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">n_cur</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">n_predict</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">LOG_TEE</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+
+<span class="w">            </span><span class="n">LOG_TEE</span><span class="p">(</span><span class="s">&quot;%s&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">llama_token_to_piece</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="n">new_token_id</span><span class="p">).</span><span class="n">c_str</span><span class="p">());</span>
+<span class="w">            </span><span class="n">fflush</span><span class="p">(</span><span class="n">stdout</span><span class="p">);</span>
+
+<span class="w">            </span><span class="c1">// prepare the next batch</span>
+<span class="w">            </span><span class="n">llama_batch_clear</span><span class="p">(</span><span class="n">batch</span><span class="p">);</span>
+
+<span class="w">            </span><span class="c1">// push this new token for next evaluation</span>
+<span class="w">            </span><span class="n">llama_batch_add</span><span class="p">(</span><span class="n">batch</span><span class="p">,</span><span class="w"> </span><span class="n">new_token_id</span><span class="p">,</span><span class="w"> </span><span class="n">n_cur</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="nb">true</span><span class="p">);</span>
+
+<span class="w">            </span><span class="n">n_decode</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="n">n_cur</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+
+<span class="w">        </span><span class="c1">// evaluate the current batch with the transformer model</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">llama_decode</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="n">batch</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;%s : failed to eval, return code %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">__func__</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">LOG_TEE</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">t_main_end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ggml_time_us</span><span class="p">();</span>
+
+<span class="w">    </span><span class="n">LOG_TEE</span><span class="p">(</span><span class="s">&quot;%s: decoded %d tokens in %.2f s, speed: %.2f t/s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="n">__func__</span><span class="p">,</span><span class="w"> </span><span class="n">n_decode</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">t_main_end</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">t_main_start</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">1000000.0f</span><span class="p">,</span><span class="w"> </span><span class="n">n_decode</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">((</span><span class="n">t_main_end</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">t_main_start</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">1000000.0f</span><span class="p">));</span>
+
+<span class="w">    </span><span class="n">llama_print_timings</span><span class="p">(</span><span class="n">ctx</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">llama_batch_free</span><span class="p">(</span><span class="n">batch</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">llama_free</span><span class="p">(</span><span class="n">ctx</span><span class="p">);</span>
+<span class="w">    </span><span class="n">llama_free_model</span><span class="p">(</span><span class="n">model</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">llama_backend_free</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div></td></tr></table></div>
+
+</div>
+</div>
+</div>
+</div>

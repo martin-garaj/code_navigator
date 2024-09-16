@@ -1,0 +1,9 @@
+default:
+  syntaxHighlight: markdown # does not have code-lines
+  pygmentsStyle: friendly
+display:
+  debounceTime: 100
+  pathData: data_to_explore/
+  initFile: _root_.yaml.html
+performance:
+  loggingTime: 60000

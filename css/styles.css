@@ -1,0 +1,133 @@
+html, body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+#navigator {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 40px);
+    margin: 20px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+#navigator-breadcrumbs {
+    margin-bottom: 5px;
+    overflow-x: auto;
+}
+
+#navigator-content {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+#navigator-panel-left, #navigator-panel-right {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+#navigator-panel-left {
+    border-right: 1px solid #ccc;
+}
+
+
+#navigator-breadcrumbs {
+    font-family: "Courier New", Courier, monospace;
+    margin-bottom: 5px;
+    overflow-x: auto;
+    color: #5c5c5c;
+}
+
+#navigator-breadcrumbs a {
+    color: #0066cc;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+#navigator-content {
+    display: flex;
+    flex: 1;
+}
+
+/* pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+} */
+
+.navigator-git-link {
+    font-size: 0.8em;
+    text-decoration: none;
+    color: #0366d6;
+    background-color: #f1f8ff;
+    border: 1px solid #6e89ff;
+    padding: 2px 5px;
+    border-radius: 3px;
+    margin-left: 10px;
+}
+
+.navigator-git-link:hover {
+    background-color: #def;
+}
+
+
+.navigator-code-link {
+    cursor: pointer;
+    border: 2px dotted #707070;
+    padding: 2px 4px;
+    margin: 2px 4px;
+}
+
+.navigator-code-link:hover {
+    text-decoration: none;
+    color: #ffffff;
+    background-color: #000000;
+    border: 2px solid #707070;
+}
+
+.navigator-title-prefix {
+    font-family: "Courier New", Courier, monospace;
+    color: #a3a3a3;
+    font-weight: lighter;
+}
+
+.navigator-title {
+    font-family: "Courier New", Courier, monospace;
+    color: #000000;
+}
+
+
+.highlight .linenos .normal {
+    display: inline-block;
+    width: 6em;
+    text-align: right;
+    padding-right: 1em;
+    box-sizing: border-box;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.section-content .highlight table .code pre {
+    overflow-x: auto;
+    white-space: pre;
+    word-wrap: normal;
+}
