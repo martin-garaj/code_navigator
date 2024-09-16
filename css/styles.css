@@ -25,8 +25,19 @@ body {
 }
 
 #navigator-breadcrumbs {
-    margin-bottom: 5px;
+    margin-bottom: 1em;
     overflow-x: auto;
+    font-family: "Courier New", Courier, monospace;
+    padding: 0.3em;
+    border: 1px solid #777777;
+    border-radius: 0.5em;
+    background-color: #eeeeee;
+}
+
+#navigator-breadcrumbs a {
+    color: #0066cc;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 #navigator-content {
@@ -48,23 +59,35 @@ body {
 }
 
 
-#navigator-breadcrumbs {
+#navigator-content .page-header {
+    border-bottom: 1px solid #777777;
+    font-size: 1.4em;
+    font-style: oblique;
     font-family: "Courier New", Courier, monospace;
-    margin-bottom: 5px;
-    overflow-x: auto;
-    color: #5c5c5c;
 }
-
-#navigator-breadcrumbs a {
-    color: #0066cc;
-    text-decoration: none;
-    cursor: pointer;
-}
-
 
 #navigator-content {
     display: flex;
     flex: 1;
+}
+
+#navigator-content .page-content {
+    margin-top: 1em;
+}
+
+#navigator-content .page-content .section-header {
+    font-size: 1.2em;
+    margin-bottom: 1em;
+    font-family: "Courier New", Courier, monospace;
+}
+#navigator-content .page-content .section-header .header-title {
+    font-weight: bold;
+}
+
+#navigator-content .page-content .section-content .highlighttable {
+    padding: 0.3em;
+    border: 1px solid #777777;
+    border-radius: 0.5em;
 }
 
 /* pre {
@@ -72,7 +95,7 @@ body {
     word-wrap: break-word;
 } */
 
-.navigator-git-link {
+#navigator-content .section-header .header-permalink {
     font-size: 0.8em;
     text-decoration: none;
     color: #0366d6;
@@ -83,19 +106,19 @@ body {
     margin-left: 10px;
 }
 
-.navigator-git-link:hover {
+#navigator-content .section-header .header-permalink:hover {
     background-color: #def;
 }
 
 
-.navigator-code-link {
+.navigator-link {
     cursor: pointer;
     border: 2px dotted #707070;
     padding: 2px 4px;
     margin: 2px 4px;
 }
 
-.navigator-code-link:hover {
+.navigator-link:hover {
     text-decoration: none;
     color: #ffffff;
     background-color: #000000;
@@ -116,7 +139,7 @@ body {
 
 .highlight .linenos .normal {
     display: inline-block;
-    width: 6em;
+    width: 4em;
     text-align: right;
     padding-right: 1em;
     box-sizing: border-box;

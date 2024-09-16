@@ -2,14 +2,10 @@
 <script type="application/json" id="page-data">
 {"pageTitle": "intro"}
 </script>
-<div class="page-header">
-<span class="header-title">intro</span>
-</div>
-<div class="page-content">
+<div class="page-header"><span class="header-title">intro</span></div><div class="page-content">
 <div class="section">
 <div class="section-header">
-<span class="header-title">Introduction</span>
-</div>
+<span class="header-title">Introduction</span></div>
 <div class="section-content">
 <div class="highlight"><pre><span></span>This is a ```llama-navigator``` a simple HTML/CSS/JS utility that 
 helps to comment and navigate llama.cpp project by creating a dynamic 
@@ -20,9 +16,7 @@ structure of inter-linked documents.
 </div>
 <div class="section">
 <div class="section-header">
-<span class="header-title-prefix">/llama.cpp/examples/simple/</span>
-<span class="header-title">simple.cpp</span>
-<a href="https://github.com/ggerganov/llama.cpp/blob/8ebe8ddebd68526757c631cd019de009697c63c2/examples/simple/simple.cpp#L1" target="_blank" class="header-permalink">link</a>
+<span class="header-title-prefix">/llama.cpp/examples/simple/</span><span class="header-title">simple.cpp</span><a href="https://github.com/ggerganov/llama.cpp/blob/8ebe8ddebd68526757c631cd019de009697c63c2/examples/simple/simple.cpp#L1" target="_blank" class="header-permalink">link</a>
 </div>
 <div class="section-content">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">  1</span>
@@ -212,7 +206,7 @@ structure of inter-linked documents.
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
 
-<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">print_usage</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="w"> </span><span class="n">argv</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n"><a onclick="handleClick('gpt_params', 'gpt_params.yaml.html')" onmouseover="debouncedHandleHover('gpt_params.yaml.html')" class="permalink">gpt_params</a></span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">params</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">print_usage</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="w"> </span><span class="n">argv</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n"><a onclick="handleClick('gpt_params', 'gpt_params.yaml.html')" onmouseover="debouncedHandleHover('gpt_params.yaml.html')" class="navigator-link">gpt_params</a></span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">params</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">gpt_params_print_usage</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">,</span><span class="w"> </span><span class="n">params</span><span class="p">);</span>
 
 <span class="w">    </span><span class="n">LOG_TEE</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">example usage:</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
@@ -221,7 +215,7 @@ structure of inter-linked documents.
 <span class="p">}</span>
 
 <span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="w"> </span><span class="n">argv</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n"><a onclick="handleClick('gpt_params', 'gpt_params.yaml.html')" onmouseover="debouncedHandleHover('gpt_params.yaml.html')" class="permalink">gpt_params</a></span><span class="w"> </span><span class="n">params</span><span class="p">;</span>
+<span class="w">    </span><span class="n"><a onclick="handleClick('gpt_params', 'gpt_params.yaml.html')" onmouseover="debouncedHandleHover('gpt_params.yaml.html')" class="navigator-link">gpt_params</a></span><span class="w"> </span><span class="n">params</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">params</span><span class="p">.</span><span class="n">prompt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Hello my name is&quot;</span><span class="p">;</span>
 <span class="w">    </span><span class="n">params</span><span class="p">.</span><span class="n">n_predict</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="p">;</span>
@@ -236,7 +230,7 @@ structure of inter-linked documents.
 
 <span class="w">    </span><span class="c1">// init LLM</span>
 
-<span class="w">    </span><span class="n"><a onclick="handleClick('llama_backend_init', 'llama_backend_init.yaml.html')" onmouseover="debouncedHandleHover('llama_backend_init.yaml.html')" class="permalink">llama_backend_init</a></span><span class="p">();</span>
+<span class="w">    </span><span class="n"><a onclick="handleClick('llama_backend_init', 'llama_backend_init.yaml.html')" onmouseover="debouncedHandleHover('llama_backend_init.yaml.html')" class="navigator-link">llama_backend_init</a></span><span class="p">();</span>
 <span class="w">    </span><span class="n">llama_numa_init</span><span class="p">(</span><span class="n">params</span><span class="p">.</span><span class="n">numa</span><span class="p">);</span>
 
 <span class="w">    </span><span class="c1">// initialize the model</span>

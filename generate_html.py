@@ -26,7 +26,7 @@ _HTML_HEADER_PERMALINK = "header-permalink"
 _HTML_SECTION = "section"
 _HTML_SECTION_HEADER = "section-header"
 _HTML_SECTION_CONTENT = "section-content"
-_HTML_PERMALINK = "permalink"
+_HTML_LINK = "navigator-link"
 
 _LINK_SEARCH_PREFIX = ">"
 _LINK_SEARCH_SUFFIX = "<"
@@ -402,7 +402,7 @@ class YamlDataChecker:
         return valid_sections, list_of_sections
 
 
-    def check_yaml_header(self, header) -> None:
+    def check_yaml_header(self, header:dict) -> None:
         """ Check `header` member of yaml file .
         """
         valid_header = True
@@ -780,11 +780,11 @@ class YamlToHtml():
         html_page = \
             f'<div class="{_HTML_PAGE}">\n' \
                 f'<script type="application/json" id="page-data">\n' \
-                    f'{"{"}"pageTitle": "{header.get("title", None)}"{"}"}\n' \
-                f'</script>\n' \
-                f'<div class="{_HTML_PAGE_HEADER}">\n' \
-                    f'{html_header}' \
-                f'</div>\n' \
+                    f'{"{"}"pageTitle": "{header.get("title", None)}"{"}"}\n'\
+                f'</script>\n'\
+                f'<div class="{_HTML_PAGE_HEADER}">'\
+                    f'{html_header}'\
+                f'</div>'\
                 f'<div class="{_HTML_PAGE_CONTENT}">\n' \
                     f'{html_sections}' \
                 f'</div>\n' \
@@ -912,9 +912,9 @@ class YamlToHtml():
         link += f"onclick=\"handleClick('{match_string}', '{link_file}')\" "\
                 f"onmouseover=\"debouncedHandleHover('{link_file}')\" "
         if css_class is not None:
-            link += f"class=\"{_HTML_PERMALINK} {css_class}\""
+            link += f"class=\"{_HTML_LINK} {css_class}\""
         else:
-            link += f"class=\"{_HTML_PERMALINK}\""
+            link += f"class=\"{_HTML_LINK}\""
         link += f">{match_string}</a>"
 
         return link
@@ -1000,11 +1000,11 @@ class YamlToHtml():
         if title_prefix is not None:
             header_html += \
                 f'<span class="{_HTML_HEADER_TITLEPREFIX}{css_classes}">'\
-                f'{title_prefix}</span>\n'
+                f'{title_prefix}</span>'
         title = header.get('title', None)
         if title is not None:
             header_html += \
-            f'<span class="{_HTML_HEADER_TITLE}{css_classes}">{title}</span>\n'
+            f'<span class="{_HTML_HEADER_TITLE}{css_classes}">{title}</span>'
         permalink = header.get('permalink', None)
         if permalink is not None:
             header_html += \
@@ -1089,14 +1089,17 @@ class YamlToHtml():
                     section_text=section_text, 
                     syntax_highlight=syntax_highlight,
                     include_line_numbers=include_line_numbers,
-                    # line_number_start=get_line_number_from_permalink(
-                    #     permalink=section_header.get('permalink', None),
-                    # ),
+                    line_number_start=get_line_number_from_permalink(
+                        permalink=section_header.get('permalink', None),
+                    ),
                     # line_number_start=1,
                 )
 
             # links
             links = section.get('links', [])
+            if isinstance(links, type(None)): 
+                # this may happe if links are `links:` without any content
+                links = []
             for link_index, link in enumerate(links):
                 html_link = \
                     self.create_link(

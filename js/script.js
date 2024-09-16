@@ -20,38 +20,6 @@ let breadcrumbs = [];
 // ========================================================================== //
 //                             Load & Inject HTML                             //
 // ========================================================================== //
-// function displayContentFromHtml(filePath, panelId) {
-//     // Get the panel element
-//     const panel = document.getElementById(panelId);
-
-//     // Show loading indicator
-//     panel.innerHTML = '<div class="loading">Loading...</div>';
-
-//     // Fetch the content of the HTML file
-//     fetch(filePath)
-//         .then(response => {
-//             if (!response.ok) {
-//                 throw new Error(`HTTP error! status: ${response.status}`);
-//             }
-//             return response.text();
-//         })
-//         .then(html => {
-//             // Set the panel's content to the loaded HTML
-//             panel.innerHTML = html;
-//         })
-//         .catch(error => {
-//             console.error('Error loading content:', error);
-            
-//             // Display error message in the panel
-//             panel.innerHTML = `
-//                 <div class="error-message">
-//                     <h3>Error Loading Content</h3>
-//                     <p>${error.message}</p>
-//                     <p>File: ${filePath}</p>
-//                 </div>
-//             `;
-//         });
-// }
 function displayContentFromHtml(filePath, panelId) {
     // Get the panel element
     const panel = document.getElementById(panelId);
@@ -148,17 +116,9 @@ function initializeBreadcrumbs() {
 // ========================================================================== //
 //                                Intialization                               //
 // ========================================================================== //
-// initializeConfig().then(() => {
-//     initializeBreadcrumbs();
-//     displayContentFromHtml(config.display.initFile, 'navigator-panel-left');
-//     scheduleHeapLogging();
-// });
-
 initializeConfig()
   .then(() => {
     initializeBreadcrumbs();
-    // fullFilePath = config.display.pathData + config.display.initFile
-    // displayContentFromHtml(fullFilePath, 'navigator-panel-left');
     scheduleHeapLogging();
   })
   .catch(error => {
@@ -243,7 +203,7 @@ function debounce(func, wait) {
 // ========================================================================== //
 function handleClick(title, filePath) {
     console.log(`INFO : handleClick(title='%s' , filePath='%s')`, title, filePath);
-    currentFile = filePath;
+    currentFile = config.display.pathData + filePath;
     displayContentFromHtml(currentFile, 'navigator-panel-left')
         .then(pageData => {
             if (pageData) {
@@ -262,15 +222,15 @@ function handleClick(title, filePath) {
 
 
 function handleHover(filePath) {
-    console.log(`INFO : handleHover(filePath='%s/%s')`, config.display.dataPath, filePath);
-    let fullFilePath = config.display.dataPath + filePath
+    console.log(`INFO : handleHover(filePath='%s/%s')`, config.display.pathData, filePath);
+    let fullFilePath = config.display.pathData + filePath
     displayContentFromHtml(fullFilePath, 'navigator-panel-right');
 }
 
 
 function clearRightPanel() {
     console.log(`INFO : clearRightPanel()`);
-    document.getElementById('navigator-right-panel').innerHTML = '';
+    document.getElementById('navigator-panel-right').innerHTML = '';
 }
 
 
@@ -283,7 +243,7 @@ function updateBreadcrumbs(title, filePath) {
     if (existingIndex !== -1) {
         breadcrumbs = breadcrumbs.slice(0, existingIndex + 1);
     } else {
-        breadcrumbs.push({ title: title, filePath: config.display.dataPath + filePath });
+        breadcrumbs.push({ title: title, filePath: config.display.pathData + filePath });
     }
     
     displayBreadcrumbs();
@@ -315,7 +275,7 @@ function displayBreadcrumbs() {
 
 
 function handleBreadcrumbClick(filePath, index) {
-    console.log(`INFO : displayBreadcrumbs(filePath='%s/%s' , index='%s')`, config.display.dataPath, filePath, index);
+    console.log(`INFO : displayBreadcrumbs(filePath='%s/%s' , index='%s')`, config.display.pathData, filePath, index);
     breadcrumbs = breadcrumbs.slice(0, index + 1);
     displayBreadcrumbs();
     displayContentFromHtml(filePath, 'navigator-panel-left');
