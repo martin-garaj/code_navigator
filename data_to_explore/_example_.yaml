@@ -1,0 +1,33 @@
+header:
+  title: Header Title
+  titlePrefix: <header title prefix>
+  permalink: <header title URL>
+
+sections:
+
+  - sectionTag: section_0
+    header:
+      title: Section Title
+      titlePrefix: <section title prefix>
+      permalink: <section title URL>
+    links:
+      - matchString: <match string>
+        linkFile: <match string>
+        matchIndex: []
+    content:
+      syntaxHighlight: <language>
+      text: |
+        Some text.
+
+  - sectionTag: 
+    header:
+      title: Section Title
+      titlePrefix: 
+      permalink: <section title URL>
+      somethingElse: kkkKKKKKKKKKKKKKKKKKKKKKKKKKKKKkkkkkKKKKKKKKKKKKKKKKKKKKKKKKKKKKkkkkkKKKKKKKKKKKKKKKKKKKKKKKKKKKKkkkkkKKKKKKKKKKKKKKKKKKKKKKKKKKKKkkkkkKKKKKKKKKKKKKKKKKKKKKKKKKKKKkkkkkKKKKKKKKKKKKKKKKKKKKKKKKKKKKkkkkkKKKKKKKKKKKKKKKKKKKKKKKKKKKKkkkkkKKKKKKKKKKKKKKKKKKKKKKKKKKKKkkkkkKKKKKKKKKKKKKKKKKKKKKKKKKKKKkkkkkKKKKKKKKKKKKKKKKKKKKKKKKKKKKkkkkkKKKKKKKKKKKKKKKKKKKKKKKKKKKKkkkkkKKKKKKKKKKKKKKKKKKKKKKKKKKKKkkkkkKKKKKKKKKKKKKKKKKKKKKKKKKKKKkkkkkKKKKKKKKKKKKKKKKKKKKKKKKKKKKkkkkkKKKKKKKKKKKKKKKKKKKKKKKKKKKKkk
+    links:
+    content:
+      lineNumberStart: 555
+      syntaxHighlight: <language>
+      text: |
+        Some text.

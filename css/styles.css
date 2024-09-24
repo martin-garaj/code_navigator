@@ -137,7 +137,7 @@ body {
 }
 
 
-.highlight .linenos .normal {
+/* .highlight .linenos .normal {
     display: inline-block;
     width: 4em;
     text-align: right;
@@ -153,4 +153,40 @@ body {
     overflow-x: auto;
     white-space: pre;
     word-wrap: normal;
+} */
+
+
+
+
+
+.highlighttable {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.linenodiv, .code {
+    display: table-cell;
+    vertical-align: top;
+}
+
+.code pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.linenodiv pre, .code pre {
+    margin: 0;
+    padding: 0;
+}
+
+.linenodiv pre span, .code pre span {
+    display: block;
+    line-height: 1.5em;
+}
+
+.linenodiv pre {
+    text-align: right;
+    padding-right: 0.5em;
+    color: #999;
 }

@@ -7,3 +7,27 @@ display:
   initFile: _root_.yaml.html
 performance:
   loggingTime: 60000
+generate:
+  sourceFileExtension: yaml
+  targetFileExtension: html
+  targetDirectory: /html
+
+dataStructure:
+  header:               # compulsory `header.title` 
+    title: str
+    titlePrefix: str
+    permalink: str
+  sections:             # optional
+    - sectionTag: str   # compulsory
+      header:           # optional
+        title: str
+        titlePrefix: str
+        permalink: str
+      links:            # optional
+        - matchString: str  
+          linkFile: str
+          matchIndex: list
+      content:
+        lineNumberStart: int
+        syntaxHighlight: str
+        text: str

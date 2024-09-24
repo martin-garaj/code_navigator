@@ -282,4 +282,26 @@ function handleBreadcrumbClick(filePath, index) {
 }
 
 
+// ========================================================================== //
+//                        Code & number line alignment                        //
+// ========================================================================== //
+function alignLineNumbers() {
+    const codeLines = document.querySelectorAll('.code pre > span');
+    const lineNumbers = document.querySelectorAll('.linenodiv pre > span');
 
+    if (codeLines.length !== lineNumbers.length) {
+        console.error('Mismatch between code lines and line numbers');
+        return;
+    }
+
+    for (let i = 0; i < codeLines.length; i++) {
+        const codeLineHeight = codeLines[i].offsetHeight;
+        lineNumbers[i].style.height = `${codeLineHeight}px`;
+        lineNumbers[i].style.display = 'block';
+    }
+}
+
+// Call the function when the page loads
+window.addEventListener('load', alignLineNumbers);
+// Optionally, call it again if the window is resized
+window.addEventListener('resize', alignLineNumbers);
