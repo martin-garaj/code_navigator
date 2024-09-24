@@ -1,0 +1,87 @@
+<div class="page">
+<script type="application/json" id="page-data">
+{"pageTitle": "ggml_tensor"}
+</script>
+<div class="page-header"><span class="header-title-prefix">/ggml/include/ggml.h</span><span class="header-title">ggml_tensor</span><a href="https://github.com/ggerganov/llama.cpp/blob/acb2c32c336ce60d765bb189563cc216e57e9fc2/ggml/include/ggml.h#L581" target="_blank" class="header-permalink">link</a>
+</div><div class="page-content">
+<div class="section">
+<div class="section-header">
+<span class="header-title">ggml_tensor</span></div>
+<div class="section-content">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span></pre></div></td><td class="code"><div><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">ggml_tensor</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">enum</span><span class="w"> </span><span class="nc">ggml_type</span><span class="w"> </span><span class="n">type</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">GGML_DEPRECATED</span><span class="p">(</span><span class="k">enum</span><span class="w"> </span><span class="nc">ggml_backend_type</span><span class="w"> </span><span class="n">backend</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;use the buffer type to find the storage location of the tensor&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">ggml_backend_buffer</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">buffer</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kt">int64_t</span><span class="w"> </span><span class="n">ne</span><span class="p">[</span><span class="n">GGML_MAX_DIMS</span><span class="p">];</span><span class="w"> </span><span class="c1">// number of elements</span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w">  </span><span class="n">nb</span><span class="p">[</span><span class="n">GGML_MAX_DIMS</span><span class="p">];</span><span class="w"> </span><span class="c1">// stride in bytes:</span>
+<span class="w">                              </span><span class="c1">// nb[0] = ggml_type_size(type)</span>
+<span class="w">                              </span><span class="c1">// nb[1] = nb[0]   * (ne[0] / ggml_blck_size(type)) + padding</span>
+<span class="w">                              </span><span class="c1">// nb[i] = nb[i-1] * ne[i-1]</span>
+
+<span class="w">    </span><span class="c1">// compute data</span>
+<span class="w">    </span><span class="k">enum</span><span class="w"> </span><span class="nc">ggml_op</span><span class="w"> </span><span class="n">op</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// op params - allocated as int32_t for alignment</span>
+<span class="w">    </span><span class="kt">int32_t</span><span class="w"> </span><span class="n">op_params</span><span class="p">[</span><span class="n">GGML_MAX_OP_PARAMS</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int32_t</span><span class="p">)];</span>
+
+<span class="w">    </span><span class="kt">int32_t</span><span class="w"> </span><span class="n">flags</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">ggml_tensor</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">grad</span><span class="p">;</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">ggml_tensor</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">src</span><span class="p">[</span><span class="n">GGML_MAX_SRC</span><span class="p">];</span>
+
+<span class="w">    </span><span class="c1">// source tensor and offset for views</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">ggml_tensor</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">view_src</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w">               </span><span class="n">view_offs</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">data</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">name</span><span class="p">[</span><span class="n">GGML_MAX_NAME</span><span class="p">];</span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">extra</span><span class="p">;</span><span class="w"> </span><span class="c1">// extra things e.g. for ggml-cuda.cu</span>
+
+<span class="w">    </span><span class="c1">// char padding[4];</span>
+<span class="p">};</span>
+</pre></div></td></tr></table></div>
+
+</div>
+</div>
+</div>
+</div>

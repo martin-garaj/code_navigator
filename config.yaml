@@ -1,17 +1,48 @@
+# This is configuration file.
+#
+#   Rules:
+#     1) configuration file needs to be at the project root directory, thus
+#        at the same level as `generate_html.py`
+#
+#   Usage:
+#     1) change the data folder `display.pathData` 
+#        (relative path to project root directory) 
+#        or change the init file `display.initFile` 
+#        (the initially displayed file and the root of breadcrums)
+#     2) set default values for syntax-highlighting 
+#        (e.g. if you omit/forgot `sections.content.syntaxHighlight` 
+#        in yaml file, this is the default value)
+#     3) decide what files are considered as input 
+#        `generate.sourceFileExtension` and what is the output file 
+#        extension `generate.targetFileExtension`
+#     4) use `dataStructure` as a reference for creating 
+#        <user-written>.yaml file
+#
+## ========================================================================== ##
+##                                 USER INPUTS                                ##
+## ========================================================================== ##
+## often changed values, if changed, re-generate all files
+display:
+  pathData: data_to_explore/ # root folder of user written yaml files
+  initFile: _init.yaml # root file within the `pathData` fodler
+  debounceTime: 100 # [ms] - debounce  time when hover-over link in document
 default:
   syntaxHighlight: markdown # does not have code-lines
-  pygmentsStyle: friendly
-display:
-  debounceTime: 100
-  pathData: data_to_explore/
-  initFile: _root_.yaml.html
-performance:
-  loggingTime: 60000
-generate:
-  sourceFileExtension: yaml
-  targetFileExtension: html
-  targetDirectory: /html
+  pygmentsStyle: friendly # default CSS style
 
+## rarely changed values, if changed, re-generate all files
+generate:
+  sourceFileExtension: [.yaml, .yml, .YAML] # extentions of user written files within `pathData`
+  targetFileExtension: .html # extension of generated HTML files
+
+## javascript logging, not important for general use
+performance:
+  loggingTime: 60000 # [ms] - logging for web-browser console
+
+## ========================================================================== ##
+##                                  REFERENCE                                 ##
+## ========================================================================== ##
+## reference structure to validate user written yaml files (do not change!)
 dataStructure:
   header:               # compulsory `header.title` 
     title: str
@@ -28,6 +59,7 @@ dataStructure:
           linkFile: str
           matchIndex: list
       content:
-        lineNumberStart: int
+        lineNumberStart: int # optional, otherwise get #Lxxx from permalink, default 1
         syntaxHighlight: str
-        text: str
+        text: |
+          str
