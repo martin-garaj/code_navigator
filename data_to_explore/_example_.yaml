@@ -1,36 +1,40 @@
 header:
   title: Header Title
-  titlePrefix: <header title prefix>
-  permalink: <header title URL>
+  titlePrefix: Prefix
+  permalink: https://github.com/martin-garaj/code_navigator/blob/main/generate_html.py#L1
 
 sections:
 
   - sectionTag: section_0
     header:
       title: Section Title
-      titlePrefix: <section title prefix>
-      permalink: <section title URL>
+      titlePrefix: Prefix
+      permalink: https://github.com/martin-garaj/code_navigator/blob/main/generate_html.py#L1
     links:
-      - matchString: <match string>
-        linkFile: <match string>
+      - matchString: text
+        linkFile: _example_.yaml
         matchIndex: []
     content:
-      syntaxHighlight: <language>
+      syntaxHighlight: markdown
       text: |
-        Some text.
+        This *text* will lead you back to *_example_.yaml*.
 
-  - sectionTag: 
+  - sectionTag: section_1
     header:
       title: Section Title
       titlePrefix: 
-      permalink: <section title URL>
+      permalink: 
       somethingElse: 
-        values: kkkKKKKKKKKKKKKKkk
-      somethingElse: 
-        values: aaaaaaaaaAAAAAAaaa
+        values: |
+          'somethingElse' intentionally throws error, since it does not conform to config.dataStructure
     links:
     content:
-      lineNumberStart: 555
-      syntaxHighlight: <language>
+      lineNumberStart: 123
+      syntaxHighlight: cpp
       text: |
-        Some text.
+        #include <iostream>
+
+        int main() {
+            std::cout << "Hello World!";
+            return 0;
+        }

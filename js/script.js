@@ -15,7 +15,14 @@ let breadcrumbs = [];
 //         .replace(/"/g, "&quot;")
 //         .replace(/'/g, "&#039;");
 // }
-
+function changeFileExtension(filePath, newExtension) {
+    newExtension = newExtension.startsWith('.') ? newExtension : '.' + newExtension;
+    let parts = filePath.split(/[\/\\]/);
+    let filename = parts.pop();
+    filename = filename.substring(0, filename.lastIndexOf('.')) || filename;
+    filename += newExtension;
+    return parts.length > 0 ? parts.join('/') + '/' + filename : filename;
+}
 
 // ========================================================================== //
 //                             Load & Inject HTML                             //
@@ -75,6 +82,7 @@ function initializeConfig() {
         .then(parsedConfig => {
             config = parsedConfig;
             currentFile = config.display.pathData + config.display.initFile;
+            currentFile = changeFileExtension(currentFile, config.generate.targetFileExtension)
             console.log(`      currentFile = '%s'`, currentFile);
 
             // Initialize debouncedHandleHover here, after config is loaded
@@ -90,6 +98,7 @@ function initializeConfig() {
 function initializeBreadcrumbs() {
     console.log(`INFO : initializeBreadcrumbs()`);
     let fullFilePath = config.display.pathData + config.display.initFile
+    fullFilePath = changeFileExtension(fullFilePath, config.generate.targetFileExtension)
     displayContentFromHtml(fullFilePath, 'navigator-panel-left')
         .then(pageData => {
             if (pageData) {
@@ -259,7 +268,7 @@ function displayBreadcrumbs() {
         
         // Add the arrow if it's not the last item
         if (i < breadcrumbs.length - 1) {
-            breadcrumbString += ' -> ';
+            breadcrumbString += '<span>  &#8594;  </span>';
         }
     }
     console.log('      breadcrumbs: ', breadcrumbString);
@@ -269,7 +278,7 @@ function displayBreadcrumbs() {
         if (index === breadcrumbs.length - 1) {
             return `<span>${item.title}</span>`;
         }
-        return `<a href="#" onclick="handleBreadcrumbClick('${item.filePath}', ${index})">${item.title}</a> > `;
+        return `<a href="#" onclick="handleBreadcrumbClick('${item.filePath}', ${index})">${item.title}</a><span>  &#8594;  </span>`;
     }).join('');
 }
 

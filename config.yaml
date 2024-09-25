@@ -24,7 +24,7 @@
 ## often changed values, if changed, re-generate all files
 display:
   pathData: data_to_explore/ # root folder of user written yaml files
-  initFile: _init.yaml # root file within the `pathData` fodler
+  initFile: _example_.yaml # root file within the `pathData` fodler
   debounceTime: 100 # [ms] - debounce  time when hover-over link in document
 default:
   syntaxHighlight: markdown # does not have code-lines
@@ -58,6 +58,8 @@ dataStructure:
         - matchString: str  
           linkFile: str
           matchIndex: list
+          sectionTag: str
+          cssClass: str
       content:
         lineNumberStart: int # optional, otherwise get #Lxxx from permalink, default 1
         syntaxHighlight: str

@@ -40,6 +40,9 @@ class CommandLineInterface():
     @property
     def config_path(self):
         return self._config_path
+    @property
+    def purge(self):
+        return self._purge
 
 
     def _register_parser(self, root_path:str):
@@ -66,6 +69,10 @@ class CommandLineInterface():
         parser.add_argument("-v", "--verbose", 
                     action="store_true",
                     help=f"If set, the script produces verbose output.")
+        parser.add_argument("-p", "--purge", 
+                    action="store_true",
+                    help=f"If set, the script purges/deletes "\
+                    f"all generated <file>.html files.")
         
         return parser
 
@@ -125,3 +132,4 @@ class CommandLineInterface():
         self._directory = directory
         self._config = config
         self._config_path = config_path
+        self._purge = args.purge

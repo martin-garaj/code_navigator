@@ -1,5 +1,5 @@
 from pathlib import Path
-
+import os
 
 from python_lib.log import print_report, log_set_prepend, log_reset_prepend, \
     print_headline, print_notice, _NOTE, _ERROR, _CRITICAL
@@ -19,15 +19,58 @@ def main():
 
     # get command line arguments
     cli = CommandLineInterface(root_path=str(Path(__file__).parent))
-    print(f"working directory    : {cli.directory}")
-    print(f"force rewrite        : {cli.force}")
-    print(f"verbose report       : {cli.verbose}")
-    print(f"recursive processing : {cli.recursive}")
-    print(f"config-file path     : {cli.config_path}")
+    print(f"working directory     : {cli.directory}")
+    print(f"force rewrite         : {cli.force}")
+    print(f"verbose report        : {cli.verbose}")
+    print(f"recursive processing  : {cli.recursive}")
+    print(f"purge generated files : {cli.purge}")
+    print(f"config-file path      : {cli.config_path}")
     if cli.verbose:
-        print(f"config-file content  : {cli.config}")
+        print(f"config-file content   : {cli.config}")
 
-    # locate all files 
+    # purging files
+    if cli.purge:
+        # locate all <file>.html
+        file_paths = get_files_of_type(
+            folder_path=Path(cli.directory, cli.config.display.pathData), 
+            file_extension=cli.config.generate.targetFileExtension, 
+            recursive=cli.recursive)
+        num_deleted = 0
+        num_skipped = 0
+        for file_idx, file_path in enumerate(file_paths):
+            log_set_prepend(value=file_idx+1, max_len=len(str(len(file_paths))))
+            
+            # show progress
+            print_headline(
+                headline=\
+                    f"{file_idx+1}) Deleting file '.../{Path(file_path).name}'", 
+                fill="=")
+            try:
+                os.remove(file_path)
+                if not Path(file_path).exists():
+                    print_report(
+                        importance=_NOTE, 
+                        message=f"deleted '{file_path}'.")
+                    log_reset_prepend()
+                    num_deleted += 1
+                else:
+                    raise FileExistsError(f"file '{file_path}' still exists!")
+            except Exception as e:
+                print_report(
+                    importance=_ERROR, 
+                    message=f"cannot delete '{file_path}' because '{e}'")
+                log_reset_prepend()
+                print_notice(notice="SKIP: HTML file not deleted", fill='!')
+                num_skipped += 1
+        print_headline(
+                headline=f'Deleted {num_deleted} files (skipped {num_skipped})',
+                fill='#', 
+                width=80,
+            )
+        return
+
+
+    # locate all <file>.yaml 
     file_paths = get_files_of_type(
         folder_path=Path(cli.directory, cli.config.display.pathData), 
         file_extension=cli.config.generate.sourceFileExtension, 

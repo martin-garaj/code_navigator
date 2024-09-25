@@ -1,3 +1,4 @@
+import markdown2
 from pathlib import Path
 from pygments import highlight
 from pygments.formatters import HtmlFormatter
@@ -28,8 +29,8 @@ _HTML_SECTION_HEADER = "section-header"
 _HTML_SECTION_CONTENT = "section-content"
 _HTML_LINK = "navigator-link"
 
-_LINK_SEARCH_PREFIX = ">"
-_LINK_SEARCH_SUFFIX = "<"
+_LINK_SEARCH_PREFIX = ""
+_LINK_SEARCH_SUFFIX = ""
 
 
 ## ========================================================================== ##
@@ -133,13 +134,30 @@ class StructToHtml():
         :param syntax_highlight: Syntax highlight alias (e.g. cpp)
         :return: Highlighted HTML text using Pygments Lexer 
         """
-        lexer = get_lexer_by_name(syntax_highlight, stripall=True)
-        formatter = HtmlFormatter(
-                linenostart=line_number_start,
-                linenos=include_line_numbers, #'table' if include_line_numbers else False,
-                full=False, # do not include CSS 
-            )
-        highlighted_text = highlight(text, lexer, formatter)
+        if syntax_highlight == "markdown":
+            highlighted_text = markdown2.markdown(text)
+        else:
+            lexer = get_lexer_by_name(syntax_highlight, stripall=True)
+            formatter = HtmlFormatter(
+                    # linenostart=line_number_start,
+                    nowrap=True,
+                    linenos=False, #'table' if include_line_numbers else False,
+                    full=False, # do not include CSS 
+                )
+            highlighted_text = highlight(text, lexer, formatter)
+
+
+        if include_line_numbers:
+            _text = f'<div id="display" class="display">\n'
+            _text += f'<div class="display-line display-start"><div class="display-line-num"></div><div class="display-line-text"></div></div>\n'
+            _line_number = ""
+            for line_idx, line in enumerate(highlighted_text.splitlines()):
+                line_number = line_number_start + line_idx
+                _line_number = f'<div class="display-line"><div class="display-line-num">{line_number}</div><div class="display-line-text">'
+                _text += f'{_line_number}{line.rstrip()}</div></div>\n'
+            _text += f'<div class="display-line display-end"><div class="display-line-num"></div><div class="display-line-text"></div></div>\n'
+            _text += f'</div>'
+            highlighted_text = _text
         return highlighted_text
 
 
@@ -359,6 +377,8 @@ class StructToHtml():
                     f'{title_prefix}</span>'
             title = header.get('title', None)
             if title is not None:
+                if title_prefix is not None:
+                    header_html += f'<span>  &#8594;  </span>'
                 header_html += \
                 f'<span class="{_HTML_HEADER_TITLE}{css_classes}">{title}</span>'
             permalink = header.get('permalink', None)
@@ -447,7 +467,6 @@ class StructToHtml():
                         permalink=section_header.get('permalink', None),
                     )
             
-            
             section_text = section_content.get('text', None)
             section_highlighted_content = \
                 self.create_html_section_content(
@@ -498,15 +517,20 @@ class StructToHtml():
                         f"No match found for '{link['matchString']}'"\
                         f" from data.sections[{section_index}]."\
                         f"link[{link_index}] in section `text`.")
-        section_html = \
-            f'<div class="{_HTML_SECTION}">\n' \
+        
+        section_html = ""
+        section_html += f'<div class="{_HTML_SECTION}">\n'
+        if len(section_header_html) > 0:
+            section_html += \
                 f'<div class="{_HTML_SECTION_HEADER}">\n' \
                     f'{section_header_html}' \
-                f'</div>\n' \
+                f'</div>\n'
+        if len(section_highlighted_content) > 0:
+            section_html += \
                 f'<div class="{_HTML_SECTION_CONTENT}">\n' \
                     f'{section_highlighted_content}' \
-                f'</div>\n' \
-            f'</div>\n'
+                f'</div>\n'
+            section_html += f'</div>\n'
         return section_html
     
 
