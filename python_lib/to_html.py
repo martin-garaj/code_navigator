@@ -27,7 +27,11 @@ _HTML_HEADER_PERMALINK = "header-permalink"
 _HTML_SECTION = "section"
 _HTML_SECTION_HEADER = "section-header"
 _HTML_SECTION_CONTENT = "section-content"
+_HTML_SECTION_IMAGE_CONTAINER = "section-image-container"
+_HTML_SECTION_IMAGE = "section-image"
 _HTML_LINK = "navigator-link"
+_HTML_DEFAULT_IMAGE_MAX_WIDTH = "95%"
+_HTML_DEFAULT_IMAGE_MAX_HEIGHT = "90vh"
 
 _LINK_SEARCH_PREFIX = ""
 _LINK_SEARCH_SUFFIX = ""
@@ -38,7 +42,7 @@ _LINK_SEARCH_SUFFIX = ""
 ## ========================================================================== ##
 class StructToHtml():
 
-    def __init__(self, data:dict, config:dict, root_path:str, suffix:str=".html"):
+    def __init__(self, data:dict, config:dict, root_path:str, suffix:str):
         self.root_path = root_path
         self.data = data
         self._default_syntax_highlight = config.default.syntaxHighlight
@@ -149,13 +153,21 @@ class StructToHtml():
 
         if include_line_numbers:
             _text = f'<div id="display" class="display">\n'
-            _text += f'<div class="display-line display-start"><div class="display-line-num"></div><div class="display-line-text"></div></div>\n'
+            _text += \
+                f'<div class="display-line display-start">'\
+                f'<div class="display-line-num"></div>'\
+                f'<div class="display-line-text"></div></div>\n'
             _line_number = ""
             for line_idx, line in enumerate(highlighted_text.splitlines()):
                 line_number = line_number_start + line_idx
-                _line_number = f'<div class="display-line"><div class="display-line-num">{line_number}</div><div class="display-line-text">'
+                _line_number = \
+                    f'<div class="display-line"><div class="display-line-num">'\
+                    f'{line_number}</div><div class="display-line-text">'
                 _text += f'{_line_number}{line.rstrip()}</div></div>\n'
-            _text += f'<div class="display-line display-end"><div class="display-line-num"></div><div class="display-line-text"></div></div>\n'
+            _text += \
+                f'<div class="display-line display-end">'\
+                f'<div class="display-line-num"></div>'\
+                f'<div class="display-line-text"></div></div>\n'
             _text += f'</div>'
             highlighted_text = _text
         return highlighted_text
@@ -378,9 +390,10 @@ class StructToHtml():
             title = header.get('title', None)
             if title is not None:
                 if title_prefix is not None:
-                    header_html += f'<span>  &#8594;  </span>'
+                    header_html += f'<span>&nbsp;&#8594;&nbsp;</span>'
                 header_html += \
-                f'<span class="{_HTML_HEADER_TITLE}{css_classes}">{title}</span>'
+                f'<span class="{_HTML_HEADER_TITLE}{css_classes}">'\
+                f'{title}</span>'
             permalink = header.get('permalink', None)
             if permalink is not None:
                 header_html += \
@@ -518,6 +531,12 @@ class StructToHtml():
                         f" from data.sections[{section_index}]."\
                         f"link[{link_index}] in section `text`.")
         
+        section_image_content = \
+            self.create_html_section_image(
+                section_image = section.get('image', None), 
+                section_index = section_index)
+
+        # put together section
         section_html = ""
         section_html += f'<div class="{_HTML_SECTION}">\n'
         if len(section_header_html) > 0:
@@ -530,9 +549,52 @@ class StructToHtml():
                 f'<div class="{_HTML_SECTION_CONTENT}">\n' \
                     f'{section_highlighted_content}' \
                 f'</div>\n'
+        if len(section_image_content) > 0:
+            section_html += \
+                f'<div class="{_HTML_SECTION_IMAGE_CONTAINER}">\n' \
+                    f'{section_image_content}' \
+                f'</div>\n'
             section_html += f'</div>\n'
+            
         return section_html
     
+    
+    def create_html_section_image(self, section_image, section_index):
+        section_image_content = ""
+        
+        # no image
+        if section_image is None:
+            return section_image_content
+        # get path
+        section_image_path = section_image.get('path', None)
+        if section_image_path is None:
+            return section_image_content
+        
+        # continue processing image
+        image_full_path = Path(self.root_path, \
+            self._config_data_path, section_image_path)
+        if not image_full_path.exists():
+            self.log_report(
+                importance=_ERROR, 
+                message=\
+                    f"Image `data.sections[{section_index}]."\
+                    f"image' point to non-existent "\
+                    f"file '{str(image_full_path)}'."\
+                )
+        image_path = str(Path(self._config_data_path, section_image_path))
+        image_alt_text = section_image.get('altText', "")
+        image_max_width = \
+            section_image.get('maxWidth', _HTML_DEFAULT_IMAGE_MAX_WIDTH)
+        image_max_height = \
+            section_image.get('maxHeight', _HTML_DEFAULT_IMAGE_MAX_HEIGHT)
+            
+        section_image_content = \
+            f'<img src="{image_path}" alt="{image_alt_text}" '\
+            f'style="max-width: {image_max_width}; '\
+            f'max-height: {image_max_height};" '\
+            f' class="{_HTML_SECTION_IMAGE}">'
+        
+        return section_image_content
 
     def check_links(self,
                    links:dict,
