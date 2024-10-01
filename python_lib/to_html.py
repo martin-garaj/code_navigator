@@ -267,7 +267,7 @@ class StructToHtml():
         if section_tag is not None:
             link += f"section-tag='{section_tag}' "
         link += f"onclick=\"handleClick('{match_string}', '{link_file}')\" "\
-                f"onmouseover=\"debouncedHandleHover('{link_file}')\" "
+                f"onmouseover=\"debouncedHandleHover(event, '{link_file}')\" "
         if css_class is not None:
             link += f"class=\"{_HTML_LINK} {css_class}\""
         else:

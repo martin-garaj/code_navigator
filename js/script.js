@@ -86,7 +86,9 @@ function initializeConfig() {
             console.log(`      currentFile = '%s'`, currentFile);
 
             // Initialize debouncedHandleHover here, after config is loaded
-            debouncedHandleHover = debounce(handleHover, config.display.debounceTime);
+            // debouncedHandleHover = debounce(handleHover, config.display.debounceTime);
+            // debouncedHandleHover = debounce((event, filePath) => handleHover(filePath), config.display.debounceTime);
+            debouncedHandleHover = debounce((event, filePath) => handleHover(event, filePath), config.display.debounceTime);
         })
         .catch(error => {
             console.error('Failed to initialize config:', error);
@@ -198,14 +200,20 @@ function resolvePath(...parts) {
 }
 
 
+// function debounce(func, wait) {
+//     let timeout;
+//     return function(...args) {
+//         clearTimeout(timeout);
+//         timeout = setTimeout(() => func.apply(this, args), wait);
+//     };
+// }
 function debounce(func, wait) {
     let timeout;
-    return function(...args) {
+    return function(event, ...args) {
         clearTimeout(timeout);
-        timeout = setTimeout(() => func.apply(this, args), wait);
+        timeout = setTimeout(() => func.apply(this, [event, ...args]), wait);
     };
 }
-
 
 // ========================================================================== //
 //                            Interactive functions                           //
@@ -230,10 +238,23 @@ function handleClick(title, filePath) {
 }
 
 
-function handleHover(filePath) {
-    console.log(`INFO : handleHover(filePath='%s/%s')`, config.display.pathData, filePath);
-    let fullFilePath = config.display.pathData + filePath
-    displayContentFromHtml(fullFilePath, 'navigator-panel-right');
+// function handleHover(filePath) {
+//     console.log(`INFO : handleHover(filePath='%s/%s')`, config.display.pathData, filePath);
+//     let fullFilePath = config.display.pathData + filePath
+//     displayContentFromHtml(fullFilePath, 'navigator-panel-right');
+// }
+function handleHover(event, filePath) {
+    // Check if the event target is within the left panel
+    const isLeftPanel = event.target.closest('#navigator-panel-left') !== null;
+
+    if (isLeftPanel) {
+        console.log(`INFO : handleHover(filePath='%s/%s')`, config.display.pathData, filePath);
+        let fullFilePath = config.display.pathData + filePath
+        displayContentFromHtml(fullFilePath, 'navigator-panel-right');
+    } else {
+        // If it's not the left panel, we do nothing
+        console.log(`INFO : Ignoring non-interactive trigger from handleHover(filePath='%s/%s')`, config.display.pathData, filePath);
+    }
 }
 
 
@@ -252,7 +273,7 @@ function updateBreadcrumbs(title, filePath) {
     if (existingIndex !== -1) {
         breadcrumbs = breadcrumbs.slice(0, existingIndex + 1);
     } else {
-        breadcrumbs.push({ title: title, filePath: config.display.pathData + filePath });
+        breadcrumbs.push({ title: title, filePath: filePath });
     }
     
     displayBreadcrumbs();

@@ -68,5 +68,5 @@ dataStructure:
       image:
         path: str       # compulsory
         altText: str    
-        width: int      # optional, default 100 or 'auto' (if height is defined)
-        height: int     # optional, default 'auto'
+        maxWidth: int      # optional, default 100 or 'auto' (if height is defined)
+        maxHeight: int     # optional, default 'auto'
