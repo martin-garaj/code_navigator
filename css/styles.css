@@ -101,7 +101,6 @@ body {
 }
 
 #navigator-content .header-permalink {
-
     box-sizing: border-box;
     text-decoration: none;
     color: #0366d6;
@@ -131,9 +130,10 @@ body {
 
 .navigator-link {
     cursor: pointer;
+    background-color: #b2ff90;
     border: 2px dotted #707070;
-    padding: 2px 4px;
-    margin: 2px 4px;
+    padding: 0.01rem 0.02rem;
+    margin: 0.01rem 0.02rem;
 }
 
 .navigator-link:hover {

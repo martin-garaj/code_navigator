@@ -323,8 +323,8 @@ class StructToHtml():
             else:
                 result.append(match.group(1))
 
-            last_end += end
-            match_count += 1
+            last_end = last_end + end
+            match_count = match_count + 1
 
         return ''.join(result), match_count
 
@@ -529,7 +529,15 @@ class StructToHtml():
                         message= \
                         f"No match found for '{link['matchString']}'"\
                         f" from data.sections[{section_index}]."\
-                        f"link[{link_index}] in section `text`.")
+                        f"link[{link_index}] in section `content.text`.")
+                else:
+                    self.log_report(
+                        importance=_NOTE, 
+                        message= \
+                        f"Found {match_count} matches for "\
+                        f"'{link['matchString']}'"\
+                        f" from data.sections[{section_index}]."\
+                        f"link[{link_index}] in section `content.text`.")
         
         section_image_content = \
             self.create_html_section_image(
@@ -689,7 +697,7 @@ class StructToHtml():
                     path_str = str(Path(self.root_path).joinpath(\
                         self._config_data_path, link['linkFile']))
                     self.log_report(
-                        importance=_WARNING,
+                        importance=_ERROR,
                         message=\
                             f"File path `data.sections[{section_index}]."\
                             f"links[{link_index}].linkFile = '{path_str}'` "\
