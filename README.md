@@ -22,7 +22,7 @@ Documents created by Code-navigator include the following features:
 **E**) Interactive navigation \
 **F**) Syntax highlight provided by Pygments \
 **G**) Proper line-numbering on line-wrapping \
-**H**) Image insertion (_not displayed_) \
+**H**) Image insertion (_not displayed_) 
 
 ![code-navigator-ui-explained](/docs/images/ui_marked.png "Code-navigaort UI explained")
 
